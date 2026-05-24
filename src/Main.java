@@ -191,7 +191,7 @@ public class Main {
 
   // Проверка 2: элементы одного списка есть во втором
   public static boolean isBothListHaveSameElements(ArrayList<String> list1, ArrayList<String> list2) {
-    if (list1.size() != list2.size()) {
+    if (!isListSizeEquals(list1, list2)) {
       return false;
     }
 
