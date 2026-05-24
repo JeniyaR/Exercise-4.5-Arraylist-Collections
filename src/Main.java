@@ -3,7 +3,7 @@ import java.util.Collections;
 
 public class Main {
 
-  static void main() {
+ public static void main() {
 
     System.out.println("Задание №1");
 
@@ -57,18 +57,19 @@ public class Main {
 
     System.out.println("Список до удаления значений " + colors3);
 
-    colors3.remove(0);
-    colors3.remove(1);
-    colors3.remove(2);
-    colors3.remove(3);
-    colors3.remove(4);
+    //через цикл
+    for (int i = colors3.size() - 1; i >= 0; i--) {
+      if (i % 2 == 0) {
+        colors3.remove(i);
+      }
+    }
 
     System.out.println("Список после удаления" + colors3);
     System.out.println();
 
     System.out.println("Задание №4");
 
-    ArrayList colors4 = new ArrayList<>();
+    ArrayList<String> colors4 = new ArrayList<>();
     colors4.add("Red");
     colors4.add("Blue");
     colors4.add("Green");
@@ -77,21 +78,12 @@ public class Main {
 
     System.out.println("До замены: " + colors4);
 
-    replaceBlue(colors4);
+    replaceBlueifNee(colors4);
 
     System.out.println("После замены: " + colors4);
-  }
 
-  public static void replaceBlue(ArrayList<String> list) {
-    if (list.contains("Blue")) {
-      if (list.contains("Black")) {
-        System.out.println("Black есть в списке, не делаем замену");
-      } else {
-        int index = list.indexOf("Blue");
-        list.set(index, "Black");
 
-      }
-    }
+
     System.out.println();
 
     System.out.println("Задание №5");
@@ -143,24 +135,24 @@ public class Main {
 
     ArrayList colors8 = new ArrayList<>();
     colors8.add("Red");
-    colors8.add("Blue");
+    colors8.add("Golden");
     colors8.add("Green");
-    colors8.add("Blue");
+    colors8.add("Silver");
     colors8.add("White");
 
     ArrayList colors9 = new ArrayList<>();
     colors9.add("Red");
-    colors9.add("Blue");
+    colors9.add("Crimson");
     colors9.add("Green");
-    colors9.add("Blue");
+    colors9.add("Navy");
     colors9.add("White");
 
     System.out.println("Список 1: " + colors8);
     System.out.println("Список 2: " + colors9);
 
-    boolean lengthCheck = checkLength(colors8, colors9);
-    boolean containsCheck = checkContains(colors8, colors9);
-    boolean orderCheck = checkOrder(colors8, colors9);
+    boolean lengthCheck = isListSizeEquals(colors8, colors9);
+    boolean containsCheck = isBothListHaveSameElements(colors8, colors9);
+    boolean orderCheck = isListHaveSameOrder(colors8, colors9);
 
     if (lengthCheck && containsCheck && orderCheck) {
       System.out.println("Списки совпадают");
@@ -178,13 +170,27 @@ public class Main {
     }
   }
 
+  //из 4 задания метод
+  private static void replaceBlueifNee(ArrayList<String> list) {
+    if (list.contains("Blue")) {
+      if (list.contains("Black")) {
+        System.out.println("Black есть в списке, не делаем замену");
+      } else {
+
+        int index = list.indexOf("Blue");
+        list.set(index, "Black");
+
+      }
+    }
+    }
+
   // Проверка 1: одинаковая длина
-  public static boolean checkLength(ArrayList<String> list1, ArrayList<String> list2) {
+  public static boolean isListSizeEquals(ArrayList<String> list1, ArrayList<String> list2) {
     return list1.size() == list2.size();
   }
 
   // Проверка 2: элементы одного списка есть во втором
-  public static boolean checkContains(ArrayList<String> list1, ArrayList<String> list2) {
+  public static boolean isBothListHaveSameElements(ArrayList<String> list1, ArrayList<String> list2) {
     if (list1.size() != list2.size()) {
       return false;
     }
@@ -198,8 +204,19 @@ public class Main {
   }
 
   // Проверка 3: элементы в том же порядке
-  public static boolean checkOrder(ArrayList<String> list1, ArrayList<String> list2) {
-    return list1.equals(list2);
+  public static boolean isListHaveSameOrder(ArrayList<String> list1, ArrayList<String> list2) {
+    if (list1.size() != list2.size()) {
+      return false;
+    }
+
+    for (int i = 0; i < list1.size(); i++) {
+      if (!list1.get(i).equals(list2.get(i))) {
+        return false;
+      }
+    }
+
+    return true;
+
 
   }
 }
