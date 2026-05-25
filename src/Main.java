@@ -150,9 +150,9 @@ public class Main {
     System.out.println("Список 1: " + colors8);
     System.out.println("Список 2: " + colors9);
 
-    boolean lengthCheck = isListSizeEquals(colors8, colors9);
-    boolean containsCheck = isBothListHaveSameElements(colors8, colors9);
-    boolean orderCheck = isListHaveSameOrder(colors8, colors9);
+   boolean lengthCheck = colors8.size() == colors9.size();
+   boolean containsCheck = isListsContainSameElements(colors8, colors9);
+   boolean orderCheck = isListsHaveSameOrder(colors8, colors9);
 
     if (lengthCheck && containsCheck && orderCheck) {
       System.out.println("Списки совпадают");
@@ -185,26 +185,19 @@ public class Main {
     }
 
   // Проверка 1: одинаковая длина
-  public static boolean isListSizeEquals(ArrayList<String> list1, ArrayList<String> list2) {
-    return list1.size() == list2.size();
-  }
+
+  //избыточный метод удален
 
   // Проверка 2: элементы одного списка есть во втором
-  public static boolean isBothListHaveSameElements(ArrayList<String> list1, ArrayList<String> list2) {
-    if (!isListSizeEquals(list1, list2)) {
-      return false;
+  public static boolean isListsContainSameElements(ArrayList<String> list1, ArrayList<String> list2) {
+
+   return list1.containsAll(list2)
+          || list2.containsAll(list1);
     }
 
-    ArrayList<String> copy1 = new ArrayList<>(list1);
-    ArrayList<String> copy2 = new ArrayList<>(list2);
-    Collections.sort(copy1);
-    Collections.sort(copy2);
-
-    return copy1.equals(copy2);
-  }
 
   // Проверка 3: элементы в том же порядке
-  public static boolean isListHaveSameOrder(ArrayList<String> list1, ArrayList<String> list2) {
+  public static boolean isListsHaveSameOrder(ArrayList<String> list1, ArrayList<String> list2) {
     if (list1.size() != list2.size()) {
       return false;
     }
